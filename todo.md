@@ -1,0 +1,1 @@
+1. Add a gradient option for both the factory and the class itself (pass in start and end colors and it automatically maps it to colors in between with range start 0 stop length with colors mapping etc)
