@@ -137,7 +137,7 @@ class GradientText:
 
         rgb_list = [tuple(int(c*255) for c in colorsys.hls_to_rgb(h,l,s)) for h,l,s in zip(hs, ls, ss)]
 
-        out = ''.join(f"\033[38;2;{r};{g};{b}m{c}\033[0m" if self.truecolor else self._to_256(c,rgb)
+        out = ''.join(f"\033[38;2;{rgb[0]};{rgb[1]};{rgb[2]}m{c}\033[0m" if self.truecolor else self._to_256(c,rgb)
                       for c,rgb in zip(self.text, rgb_list))
         return out
 
