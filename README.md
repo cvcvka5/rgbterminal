@@ -15,9 +15,9 @@ Terminal text coloring with RGB and multi-stop gradients in Python.
 
 ## Installation
 
-&&&bash
+```bash
 pip install rgbterminal
-&&&
+```
 
 ---
 
@@ -25,23 +25,23 @@ pip install rgbterminal
 
 ### Basic RGB Text
 
-&&&python
+```python
 from rgbterminal import RGBText
 
 text = RGBText("Hello World!", rgb=(255, 0, 0), truecolor=True)
 print(text)
-&&&
+```
 
 ### RGBTextFactory
 
-&&&python
+```python
 from rgbterminal import RGBTextFactory
 
 factory = RGBTextFactory(rgb=(0, 128, 255), truecolor=True)
 text1 = factory.t("Hello")
 text2 = factory.t("World")
 print(text1, text2)
-&&&
+```
 
 ---
 
@@ -51,7 +51,7 @@ print(text1, text2)
 
 ### Multi-stop Gradient Example
 
-&&&python
+```python
 from rgbterminal import GradientText
 
 gradient = GradientText(
@@ -60,7 +60,7 @@ gradient = GradientText(
     truecolor=True
 )
 print(gradient)
-&&&
+```
 
 - Supports **any number of RGB stops**.
 - Interpolates colors in **HLS space** for smooth transitions.
@@ -68,13 +68,13 @@ print(gradient)
 
 ### GradientTextFactory
 
-&&&python
+```python
 from rgbterminal import GradientTextFactory
 
 factory = GradientTextFactory(rgb_stops=[(255,0,0), (0,0,255)], truecolor=True)
 text = factory.t("Hello Gradient!")
 print(text)
-&&&
+```
 
 - Factory allows you to reuse the same gradient multiple times.
 - You can override stops per call if needed.
