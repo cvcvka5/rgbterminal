@@ -1,6 +1,27 @@
-<img src="assets/banner.png" width=400 >
+<p align="center">
+  <img src="assets/banner.png" alt="RGBTerminal Banner" width="100%" />
 
-# RGBTerminal
+  <p align="center">
+  <!-- Row 1 -->
+  <a href="https://pypi.org/project/rgbterminal/">
+    <img src="https://img.shields.io/pypi/v/rgbterminal?label=PyPI%20Version&color=ff5f6d&labelColor=1a1a1a&logo=pypi&logoColor=white&style=for-the-badge">
+  </a>
+  <a href="https://pypi.org/project/rgbterminal/">
+    <img src="https://img.shields.io/pypi/pyversions/rgbterminal?label=Python&color=f9a825&labelColor=1a1a1a&logo=python&logoColor=f9a825&style=for-the-badge">
+  </a>
+</p>
+
+<p align="center">
+  <!-- Row 2 -->
+  <a href="https://pypi.org/project/rgbterminal/">
+    <img src="https://img.shields.io/pypi/dm/rgbterminal?label=Downloads&color=42a5f5&labelColor=1a1a1a&logo=cloudsmith&logoColor=42a5f5&style=for-the-badge">
+  </a>
+  <a href="https://github.com/cvcvka5/RGBTerminal/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/cvcvka5/RGBTerminal?label=License&color=64dd17&labelColor=1a1a1a&logo=open-source-initiative&logoColor=64dd17&style=for-the-badge">
+  </a>
+</p>
+
+## RGBTerminal
 
 Terminal text coloring with RGB and multi-stop gradients in Python.
 
