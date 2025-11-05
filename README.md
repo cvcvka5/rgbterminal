@@ -1,84 +1,83 @@
 # rgbterminal
 
-`rgbterminal` is a lightweight Python library for **terminal-colored text** with both **256-color** and **truecolor (24-bit)** support. It allows you to print colorful text in the terminal easily, with a convenient factory system for repeated colors.
+Terminal text coloring with RGB and multi-stop gradients in Python.
 
 ---
 
 ## Features
 
-- Foreground **256-color and truecolor** support  
-- Easy-to-use **factory** for creating multiple colored texts  
-- Access RGB values, cube levels, and terminal color codes  
-- Compatible with Python 3.10+  
+- Color text in the terminal using **24-bit RGB** or **256-color approximation**
+- Multi-stop gradient support
+- Easy-to-use factories for repetitive usage
+- Pure Python, minimal dependencies (`numpy`)
 
 ---
 
 ## Installation
 
-Install via pip:
-
-```bash
+&&&bash
 pip install rgbterminal
-```
+&&&
 
 ---
 
 ## Usage
 
-### Basic Usage
+### Basic RGB Text
 
-```python
+&&&python
 from rgbterminal import RGBText
 
-# 256-color text
-text1 = RGBText("Hello 256-color!", rgb=(120, 200, 80), truecolor=False)
-print(text1)
+text = RGBText("Hello World!", rgb=(255, 0, 0), truecolor=True)
+print(text)
+&&&
 
-# Truecolor text
-text2 = RGBText("Hello Truecolor!", rgb=(120, 200, 80), truecolor=True)
-print(text2)
-```
+### RGBTextFactory
 
-### Using RGBTextFactory
-
-```python
+&&&python
 from rgbterminal import RGBTextFactory
 
-factory = RGBTextFactory((255, 100, 50))
-
-# Generate multiple texts with same base color
-t1 = factory.t("Factory 256-color text")
-t2 = factory.t_truecolor("Factory Truecolor text")
-t3 = factory.text("Another 256-color text")
-
-print(t1)
-print(t2)
-print(t3)
-
-# Access properties
-print("Factory RGB:", factory.r, factory.g, factory.b)
-print("Cube levels:", factory.r_level, factory.g_level, factory.b_level)
-print("256-color code:", factory.code)
-```
+factory = RGBTextFactory(rgb=(0, 128, 255), truecolor=True)
+text1 = factory.t("Hello")
+text2 = factory.t("World")
+print(text1, text2)
+&&&
 
 ---
 
-## Properties
+## Gradient Text
 
-For any `RGBText` object:
+`GradientText` allows you to apply a **smooth gradient** across a string using multiple color stops.
 
-- `r`, `g`, `b` → RGB values (0-255)  
-- `r_level`, `g_level`, `b_level` → Cube levels (0-5)  
-- `red`, `green`, `blue` → aliases for `r`, `g`, `b`  
-- `red_level`, `green_level`, `blue_level` → aliases for cube levels  
-- `code` → 256-color terminal code  
-- `in_256color` → 256-color string for printing  
+### Multi-stop Gradient Example
 
----
+&&&python
+from rgbterminal import GradientText
 
-## Contributing
+gradient = GradientText(
+    "Gradient Example",
+    rgb_stops=[(255, 0, 0), (255, 255, 0), (0, 255, 0), (0, 0, 255)],
+    truecolor=True
+)
+print(gradient)
+&&&
 
-Contributions are welcome! Please fork the repo and submit a pull request.
+- Supports **any number of RGB stops**.
+- Interpolates colors in **HLS space** for smooth transitions.
+- Works with both **truecolor (24-bit)** and **256-color terminals**.
+
+### GradientTextFactory
+
+&&&python
+from rgbterminal import GradientTextFactory
+
+factory = GradientTextFactory(rgb_stops=[(255,0,0), (0,0,255)], truecolor=True)
+text = factory.t("Hello Gradient!")
+print(text)
+&&&
+
+- Factory allows you to reuse the same gradient multiple times.
+- You can override stops per call if needed.
 
 ---
 
