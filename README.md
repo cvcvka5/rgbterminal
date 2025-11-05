@@ -21,13 +21,13 @@
   </a>
 </p>
 
-## RGBTerminal
-
+<p align="center">
 Terminal text coloring with RGB and multi-stop gradients in Python.
+</p>
 
 ---
 
-## Features
+### Features
 
 - Color text in the terminal using **24-bit RGB** or **256-color approximation**
 - Multi-stop gradient support
@@ -36,7 +36,7 @@ Terminal text coloring with RGB and multi-stop gradients in Python.
 
 ---
 
-## Installation
+### Installation
 
 ```bash
 pip install rgbterminal
@@ -44,9 +44,9 @@ pip install rgbterminal
 
 ---
 
-## Usage
+### Usage
 
-### Basic RGB Text
+#### Basic RGB Text
 
 ```python
 from rgbterminal import RGBText
@@ -55,7 +55,7 @@ text = RGBText("Hello World!", rgb=(255, 0, 0), truecolor=True)
 print(text)
 ```
 
-### RGBTextFactory
+#### RGBTextFactory
 
 ```python
 from rgbterminal import RGBTextFactory
@@ -68,11 +68,11 @@ print(text1, text2)
 
 ---
 
-## Gradient Text
+### Gradient Text
 
 `GradientText` allows you to apply a **smooth gradient** across a string using multiple color stops.
 
-### Multi-stop Gradient Example
+#### Multi-stop Gradient Example
 
 ```python
 from rgbterminal import GradientText
@@ -89,7 +89,7 @@ print(gradient)
 - Interpolates colors in **HLS space** for smooth transitions.
 - Works with both **truecolor (24-bit)** and **256-color terminals**.
 
-### GradientTextFactory
+#### GradientTextFactory
 
 ```python
 from rgbterminal import GradientTextFactory
@@ -104,6 +104,6 @@ print(text)
 
 ---
 
-## License
+### License
 
 MIT License
