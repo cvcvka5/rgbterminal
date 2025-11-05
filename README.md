@@ -1,6 +1,6 @@
 <img src="assets/banner.png" width=400 >
 
-<br>
+# RGBTerminal
 
 Terminal text coloring with RGB and multi-stop gradients in Python.
 
