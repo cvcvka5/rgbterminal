@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/banner.png" alt="RGBTerminal Banner" width="100%" />
+  <img src="https://raw.githubusercontent.com/cvcvka5/RGBTerminal/main/assets/banner.png" alt="RGBTerminal Banner" width="100%" />
 
   <p align="center">
   <!-- Row 1 -->
