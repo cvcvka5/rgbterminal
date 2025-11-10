@@ -1,5 +1,6 @@
 import numpy as np
 import colorsys
+import time
 
 class RGBText:
     """
@@ -254,3 +255,71 @@ class GradientTextFactory:
     def t(self, text: str, rgb_stops: list[tuple[int, int, int]] = None, truecolor: bool = None) -> GradientText:
         """Short alias for self.text()."""
         return self.text(text, rgb_stops, truecolor)
+    
+    
+def _lerp(a: float, b: float, t: float) -> float:
+    return a + (b - a) * t
+
+def _lerp_color(c1: tuple[int,int,int], c2: tuple[int,int,int], t: float) -> tuple[int,int,int]:
+    return (
+        int(_lerp(c1[0], c2[0], t)),
+        int(_lerp(c1[1], c2[1], t)),
+        int(_lerp(c1[2], c2[2], t)),
+    )
+
+def animated_gradient_print(gradient_text: "GradientText",
+                     duration: float,
+                     fps: int = 30,
+                     speed: float = 1.0,
+                     resolution: int = 300):
+    """
+    Smooth, perfectly-periodic sliding gradient.
+
+    - resolution: total number of sampled colors around the circular gradient.
+    - speed: number of full cycles per `duration` (1.0 = one full loop in duration).
+    """
+    frames = max(1, int(duration * fps))
+
+    base = gradient_text.rgb_stops[:]  # original (sparse) stops
+    m = len(base)
+    if m == 0:
+        return
+
+    # --- Create a periodic dense sampling of the circular gradient ---
+    # sample at `resolution` uniformly spaced positions around the loop
+    dense: list[tuple[int, int, int]] = []
+    for k in range(resolution):
+        # position in "stop space" (0..m)
+        pos = (k / resolution) * m
+        i0 = int(pos) % m
+        i1 = (i0 + 1) % m
+        frac = pos - int(pos)
+        c = _lerp_color(base[i0], base[i1], frac)
+        dense.append(c)
+
+    # keep a copy to restore at the end
+    original_dense = dense[:]
+
+    # --- Animate by sampling dense at fractional offsets (wraps smoothly) ---
+    for frame in range(frames):
+        # fractional offset in dense-space
+        offset = (frame / frames) * speed * resolution  # float in [0, speed*resolution)
+        offset %= resolution  # wrap to [0, resolution)
+        shifted: list[tuple[int, int, int]] = []
+
+        # sample dense at fractional positions (i + offset)
+        for i in range(resolution):
+            sample_pos = (i + offset) % resolution
+            s0 = int(sample_pos)
+            s1 = (s0 + 1) % resolution
+            t = sample_pos - s0
+            color = _lerp_color(dense[s0], dense[s1], t)
+            shifted.append(color)
+
+        gradient_text.rgb_stops = shifted
+        print(gradient_text, end="\r", flush=True)
+        time.sleep(1 / fps)
+
+    # --- Restore original dense gradient so final state equals initial ---
+    gradient_text.rgb_stops = original_dense
+    print(gradient_text)  # final newline/print
