@@ -270,8 +270,8 @@ def _lerp_color(c1: tuple[int,int,int], c2: tuple[int,int,int], t: float) -> tup
 def animated_gradient_print(gradient_text: "GradientText",
                      duration: float,
                      fps: int = 30,
-                     speed: float = 1.0,
-                     resolution: int = 300):
+                     speed: float = 2.0,
+                     resolution: int = 10):
     """
     Smooth, perfectly-periodic sliding gradient.
 
