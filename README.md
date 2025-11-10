@@ -29,10 +29,11 @@ Terminal text coloring with RGB and multi-stop gradients in Python.
 
 ### Features
 
-- Color text in the terminal using **24-bit RGB** or **256-color approximation**
-- Multi-stop gradient support
-- Easy-to-use factories for repetitive usage
-- Pure Python, minimal dependencies (`numpy`)
+- Color text using **truecolor (24-bit)** or **256-color approximation**
+- Multi-stop **gradient text** with smooth interpolation
+- Reusable **factory classes** for fast generation
+- **Animated gradients** with time-based looping
+- Pure Python — only depends on `numpy`
 
 ---
 
@@ -51,7 +52,7 @@ pip install rgbterminal
 ```python
 from rgbterminal import RGBText
 
-text = RGBText("Hello World!", rgb=(255, 0, 0), truecolor=True)
+text = RGBText("Hello World!", rgb=(255, 0, 0), truecolor=False)
 print(text)
 ```
 
@@ -60,7 +61,7 @@ print(text)
 ```python
 from rgbterminal import RGBTextFactory
 
-factory = RGBTextFactory(rgb=(0, 128, 255), truecolor=True)
+factory = RGBTextFactory(rgb=(0, 128, 255), truecolor=False)
 text1 = factory.t("Hello")
 text2 = factory.t("World")
 print(text1, text2)
@@ -80,7 +81,7 @@ from rgbterminal import GradientText
 gradient = GradientText(
     "Gradient Example",
     rgb_stops=[(255, 0, 0), (255, 255, 0), (0, 255, 0), (0, 0, 255)],
-    truecolor=True
+    truecolor=False
 )
 print(gradient)
 ```
@@ -94,13 +95,29 @@ print(gradient)
 ```python
 from rgbterminal import GradientTextFactory
 
-factory = GradientTextFactory(rgb_stops=[(255,0,0), (0,0,255)], truecolor=True)
+factory = GradientTextFactory(rgb_stops=[(255,0,0), (0,0,255)], truecolor=False)
 text = factory.t("Hello Gradient!")
 print(text)
 ```
 
 - Factory allows you to reuse the same gradient multiple times.
 - You can override stops per call if needed.
+
+#### Animated Gradients
+The new ```animated_gradient_print``` function animates a smooth, cyclic gradient across text in real time — perfect for banners, CLI logos, or loading indicators.
+
+```python
+import time
+from rgbterminal import GradientText, animated_gradient_print
+
+gradient = GradientText(
+    "Animated RGB Terminal!",
+    rgb_stops=[(255,0,0), (255,255,0), (0,255,0), (0,255,255), (0,0,255)],
+    truecolor=False
+)
+
+animated_gradient_print(gradient, duration=5, fps=30, speed=1.0, resolution=12)
+```
 
 ---
 
